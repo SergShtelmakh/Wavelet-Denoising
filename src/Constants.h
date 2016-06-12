@@ -18,4 +18,8 @@ namespace Constants {
     // audio player
     const QPen audioPlayerTimeLinePen = QPen(QBrush(Qt::red), 5);
     const int  audioPlayerTimeLineUpdateMs = 100;
+
+    // thresholds manager
+    const double thresholdsDefaultAverageCount = 100;
+    const double thresholdsDefaultOverValue    = 0;
 }
