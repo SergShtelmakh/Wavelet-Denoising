@@ -13,9 +13,17 @@ TEMPLATE = app
 
 CONFIG   += C++11
 
-SOURCES  += $$PWD/src/main.cpp\
+SOURCES  += $$PWD/src/AudioSignal.cpp \
+            $$PWD/src/main.cpp \
             $$PWD/src/MainWindow.cpp
 
-HEADERS  += $$PWD/src/MainWindow.h
+HEADERS  += $$PWD/src/AudioSignal.h \
+            $$PWD/src/Constants.h \
+            $$PWD/src/MainWindow.h
 
 FORMS    += $$PWD/src/MainWindow.ui
+
+LIBS     += $$PWD/libs/libAquila.a
+
+INCLUDEPATH += $$PWD/libs
+DEPENDPATH  += $$PWD/libs
