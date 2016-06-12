@@ -1,7 +1,6 @@
 #include "DenoisingManager.h"
 
 #include <src/ThresholdsManager.h>
-#include <src/wavelets/DiscretePeriodicWavelet.h>
 
 DenoisingManager::DenoisingManager()
     : m_wavelet(new DiscretePeriodicWavelet)
@@ -11,14 +10,14 @@ DenoisingManager::DenoisingManager()
 
 void DenoisingManager::setSignal(const AudioSignal &signal)
 {
-    m_inputSignal = signal.source();
+    m_noisedSignal = signal.source();
 }
 
 void DenoisingManager::prepareToDenoising(const QString &waveletName, int level)
 {
     m_wavelet->setWaveletFunction(Wavelet::fromString(waveletName));
     m_wavelet->setLevel(level);
-    m_wavelet->setSignal(m_inputSignal);
+    m_wavelet->setSignal(m_noisedSignal);
 
     m_wavelet->makeTransform();
     m_transformedSignal = m_wavelet->transformedSignal();
@@ -33,7 +32,7 @@ void DenoisingManager::denoising(const QString &thresholdType, const QVector<dou
 
     m_wavelet->setTransformedSignalVector(m_thresholdsManager->thresholdedSignalsVector());
     m_wavelet->makeInverseTransform();
-    m_outputSignal = m_wavelet->outputSignal();
+    m_denoisedSignal = m_wavelet->outputSignal();
 }
 
 AudioSignal::SignalsSourceVector DenoisingManager::transformedDecomposition() const

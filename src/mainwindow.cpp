@@ -3,6 +3,7 @@
 
 #include <src/AudioSignal.h>
 #include <src/AudioPlayerWidget.h>
+#include <src/DenoisingWidget.h>
 #include <src/PlotManager.h>
 
 #include <QFileDialog>
@@ -17,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_fileName(csTestFileName)
     , m_inputSignal(new AudioSignal(csTestFileName))
     , m_processedSignal(new AudioSignal(m_inputSignal->source()))
+    , m_denoisingWidget(new DenoisingWidget)
 {
     ui->setupUi(this);
     updatePlot();
@@ -46,7 +48,9 @@ void MainWindow::on_pbMakeWhiteNoise_clicked()
 
 void MainWindow::on_pbManualDenoising_clicked()
 {
-    // TODO
+    m_denoisingWidget->setNoisedSignal(*m_processedSignal.data());
+    m_denoisingWidget->setClearSignal(*m_inputSignal.data());
+    m_denoisingWidget->show();
 }
 
 void MainWindow::on_pbAutomaticDenoising_clicked()

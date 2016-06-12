@@ -22,4 +22,7 @@ namespace Constants {
     // thresholds manager
     const double thresholdsDefaultAverageCount = 100;
     const double thresholdsDefaultOverValue    = 0;
+
+    // denoising widget
+    const bool showThresholdsWidgetSeparately = false;
 }
