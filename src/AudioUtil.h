@@ -6,6 +6,8 @@ namespace AudioUtil {
 using SignalSource = AudioSignal::SignalSource;
 
 SignalSource makeWhiteNoise(SignalSource &signal, double maxAmplitude, double density);
+
+QString generateAudioFileName(const QString &str = "");
 }
 
 

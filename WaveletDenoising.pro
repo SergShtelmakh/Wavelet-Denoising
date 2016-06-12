@@ -17,15 +17,18 @@ SOURCES  += $$PWD/src/AudioSignal.cpp \
             $$PWD/src/AudioUtil.cpp \
             $$PWD/src/main.cpp \
             $$PWD/src/MainWindow.cpp \
-            $$PWD/src/PlotManager.cpp
+            $$PWD/src/PlotManager.cpp \
+    src/AudioPlayerWidget.cpp
 
 HEADERS  += $$PWD/src/AudioSignal.h \
             $$PWD/src/AudioUtil.h \
             $$PWD/src/Constants.h \
             $$PWD/src/MainWindow.h \
-            $$PWD/src/PlotManager.h
+            $$PWD/src/PlotManager.h \
+    src/AudioPlayerWidget.h
 
-FORMS    += $$PWD/src/MainWindow.ui
+FORMS    += $$PWD/src/MainWindow.ui \
+    src/AudioPlayerWidget.ui
 
 LIBS     += $$PWD/libs/libAquila.a
 

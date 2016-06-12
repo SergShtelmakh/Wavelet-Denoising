@@ -1,5 +1,7 @@
 #include "AudioUtil.h"
 
+#include <QTime>
+
 namespace {
 
 int rand(int min, int max) {
@@ -24,4 +26,9 @@ AudioUtil::SignalSource AudioUtil::makeWhiteNoise(SignalSource &signal, double m
         result << sample;
     }
     return result;
+}
+
+QString AudioUtil::generateAudioFileName(const QString &str)
+{
+    return QString("%1audio%2.wav").arg(str).arg(QTime::currentTime().toString("hh_mm_ss_zzz"));
 }
