@@ -4,8 +4,7 @@
 #include <src/Constants.h>
 #include <src/DenoisingManager.h>
 #include <src/PlotManager.h>
-// TODO
-//#include <src/ThresholdsWidget.h>
+#include <src/ThresholdsWidget.h>
 #include <src/ThresholdsManager.h>
 #include <src/wavelets/Wavelet.h>
 
@@ -44,21 +43,19 @@ void DenoisingWidget::setClearSignal(const AudioSignal &signal)
 
 QVector<double> DenoisingWidget::thresholdsData() const
 {
-    // TODO
     QVector<double> result;
-//    for (auto w : m_widgets) {
-//        result << w->threshold();
-//    }
+    for (auto w : m_widgets) {
+        result << w->threshold();
+    }
     return result;
 }
 
 void DenoisingWidget::cleanWidget()
 {
-    // TODO
-//    while (!m_widgets.empty()) {
-//        auto w = m_widgets.takeFirst();
-//        delete w;
-//    }
+    while (!m_widgets.empty()) {
+        auto w = m_widgets.takeFirst();
+        delete w;
+    }
 }
 
 void DenoisingWidget::on_pbPrepare_clicked()
@@ -98,16 +95,14 @@ void DenoisingWidget::on_pbPrepare_clicked()
     m_itemsCount = decomposition.size();
 
     // initialize thresholds widgets
+    for (auto item : decomposition) {
+        auto wdg = new ThresholdsWidget(this);
+        m_widgets.push_back(wdg);
+        wdg->setSignalSource(item);
+        layout->addWidget(wdg);
+    }
 
-    // TODO
-//    for (auto item : decomposition) {
-//        auto wdg = new ThresholdsWidget(this);
-//        m_widgets.push_back(wdg);
-//        wdg->setSignalSource(item);
-//        layout->addWidget(wdg);
-//    }
-
-//    Q_ASSERT(m_itemsCount == m_widgets.size());
+    Q_ASSERT(m_itemsCount == m_widgets.size());
 }
 
 void DenoisingWidget::on_pbProcess_clicked()

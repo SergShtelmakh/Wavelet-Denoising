@@ -4,7 +4,7 @@
 
 class AudioSignal;
 class DenoisingManager;
-//class ThresholdsWidget;
+class ThresholdsWidget;
 
 namespace Ui { class DenoisingWidget; }
 
@@ -27,7 +27,7 @@ private:
     QVector<double> thresholdsData() const;
 
     Ui::DenoisingWidget *ui;
-//    QVector<ThresholdsWidget *> m_widgets;
+    QVector<ThresholdsWidget *> m_widgets;
     QScopedPointer<DenoisingManager> m_denoisingManager;
     QScopedPointer<AudioSignal> m_noisedAudioSignal;
     QScopedPointer<AudioSignal> m_denoisedAudioSignal;

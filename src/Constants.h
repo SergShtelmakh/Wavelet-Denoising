@@ -8,6 +8,9 @@ namespace Constants {
     // audio
     const double audioDefaultSampleFrequency = 48000.0;
 
+    // audio util
+    const int audioUtilMaxDensityVal = 32000;
+
     // noise
     const double noiseDefaultMaxAmplitude = 1000;
     const double noiseDefaultDensity      = 1.0;
@@ -25,4 +28,7 @@ namespace Constants {
 
     // denoising widget
     const bool showThresholdsWidgetSeparately = false;
+
+    // thresholds widget
+    const QPen thresholdsLevelPen = QPen(QBrush(Qt::red), 1);
 }
