@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QRect>
+
 namespace Constants {
 
     // audio
@@ -8,4 +10,5 @@ namespace Constants {
     const double noiseDefaultMaxAmplitude = 1000;
     const double noiseDefaultDensity      = 1.0;
 
+    const QRect plotDefaultGeometry = QRect(100, 100, 500, 500);
 }

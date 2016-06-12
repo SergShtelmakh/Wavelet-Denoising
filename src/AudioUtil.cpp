@@ -15,7 +15,6 @@ bool genenerateRandomEvent(double probability)
 
 }
 
-
 AudioUtil::SignalSource AudioUtil::makeWhiteNoise(SignalSource &signal, double maxAmplitude, double density) {
     SignalSource result;
     for (auto sample : signal) {
@@ -26,7 +25,3 @@ AudioUtil::SignalSource AudioUtil::makeWhiteNoise(SignalSource &signal, double m
     }
     return result;
 }
-
-
-
-
