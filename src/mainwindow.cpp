@@ -3,7 +3,9 @@
 
 #include <src/AudioSignal.h>
 #include <src/AudioPlayerWidget.h>
+#include <src/AudioUtil.h>
 #include <src/DenoisingWidget.h>
+#include <src/DenoisingManager.h>
 #include <src/PlotManager.h>
 
 #include <QFileDialog>
@@ -55,7 +57,13 @@ void MainWindow::on_pbManualDenoising_clicked()
 
 void MainWindow::on_pbAutomaticDenoising_clicked()
 {
-    // TODO
+    DenoisingManager manager;
+    manager.setSignal(*m_processedSignal);
+    manager.prepareToDenoising(Wavelet::Biorthogonal1_3, 5);
+    manager.automaticDenoising(ThresholdsManager::CustomHard);
+    m_processedSignal.reset(new AudioSignal(manager.denoisedSignal()));
+    qDebug("SNR %f", AudioUtil::SNR(m_processedSignal->source(), m_inputSignal->source()));
+    updatePlot();
 }
 
 void MainWindow::on_pbAutomaticDenoisingTest_clicked()

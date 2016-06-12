@@ -64,7 +64,7 @@ void ThresholdsWidget::setSignalSource(const SignalSource &signal)
     m_signalSource = signal;
     emit signalChanged(m_signalSource);
 
-    setMaxThreshold(AudioUtil::maxAmplitude(m_signalSource));
+    setMaxThreshold(AudioUtil::findMax(m_signalSource));
     m_signalAverage = AudioUtil::amplitudeAverage(m_signalSource, Constants::thresholdsDefaultAverageCount, true);
     m_signalDensity = AudioUtil::signalDensity(m_signalAverage);
 

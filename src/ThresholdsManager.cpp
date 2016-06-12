@@ -1,7 +1,6 @@
 #include "ThresholdsManager.h"
 
 #include <src/AudioUtil.h>
-#include <src/Constants.h>
 
 #include <QHash>
 
@@ -97,19 +96,40 @@ ThresholdsManager::SignalSource ThresholdsManager::threshodedSignal(ThresholdsMa
     return result;
 }
 
-void ThresholdsManager::makeThreshold(const QVector<double> &thresholds)
+void ThresholdsManager::makeThreshold(const QVector<double> &thresholdLevels)
 {
-    if (thresholds.size() != m_signalsVector.size()) {
+    if (thresholdLevels.size() != m_signalsVector.size()) {
         qDebug("Wrong thresholds vector size");
         return;
     }
 
     m_thresholdedSignalsVector.clear();
-    for (int i = 0; i < thresholds.size(); ++i) {
+    for (int i = 0; i < thresholdLevels.size(); ++i) {
         m_thresholdedSignalsVector << threshodedSignal(m_thresholdType,
                                                        m_signalsVector.at(i),
-                                                       thresholds[i],
+                                                       thresholdLevels[i],
                                                        Constants::thresholdsDefaultAverageCount,
                                                        Constants::thresholdsDefaultOverValue);
+    }
+}
+
+void ThresholdsManager::automaticThreshold(const ThresholdsManager::ThresholdType &type)
+{
+    m_thresholdedSignalsVector.clear();
+
+    for (int i = 0; i < m_signalsVector.size(); i++) {
+        auto average = AudioUtil::amplitudeAverage(m_signalsVector.at(i), Constants::thresholdsDefaultAverageCount, true);
+        auto density = AudioUtil::signalDensity(average);
+        auto averageDensity = AudioUtil::amplitudeAverage(density, Constants::thresholdsDefaultAverageCount);
+        auto derivative = AudioUtil::derivative(averageDensity, 100, true);
+        // TODO fix thresholds level
+        auto level = AudioUtil::indexOfMin(derivative);
+
+        m_thresholdedSignalsVector << threshodedSignal(type,
+                                                       m_signalsVector.at(i),
+                                                       level,
+                                                       Constants::thresholdsDefaultAverageCount,
+                                                       Constants::thresholdsDefaultOverValue);
+
     }
 }

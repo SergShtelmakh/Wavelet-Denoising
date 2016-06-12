@@ -1,7 +1,5 @@
 #include "DenoisingManager.h"
 
-#include <src/ThresholdsManager.h>
-
 DenoisingManager::DenoisingManager()
     : m_wavelet(new DiscretePeriodicWavelet)
     , m_thresholdsManager(new ThresholdsManager)
@@ -15,7 +13,12 @@ void DenoisingManager::setSignal(const AudioSignal &signal)
 
 void DenoisingManager::prepareToDenoising(const QString &waveletName, int level)
 {
-    m_wavelet->setWaveletFunction(Wavelet::fromString(waveletName));
+    prepareToDenoising(Wavelet::fromString(waveletName), level);
+}
+
+void DenoisingManager::prepareToDenoising(Wavelet::WaveletFunction name, int level)
+{
+    m_wavelet->setWaveletFunction(name);
     m_wavelet->setLevel(level);
     m_wavelet->setSignal(m_noisedSignal);
 
@@ -31,6 +34,17 @@ void DenoisingManager::denoising(const QString &thresholdType, const QVector<dou
     m_thresholdsManager->makeThreshold(thresholds);
 
     m_wavelet->setTransformedSignalVector(m_thresholdsManager->thresholdedSignalsVector());
+    m_wavelet->makeInverseTransform();
+    m_denoisedSignal = m_wavelet->outputSignal();
+}
+
+void DenoisingManager::automaticDenoising(ThresholdsManager::ThresholdType type)
+{
+    m_thresholdsManager->setSignalsVector(m_transformedSignalVector);
+    m_thresholdsManager->automaticThreshold(type);
+
+    m_wavelet->setTransformedSignalVector(m_thresholdsManager->thresholdedSignalsVector());
+
     m_wavelet->makeInverseTransform();
     m_denoisedSignal = m_wavelet->outputSignal();
 }

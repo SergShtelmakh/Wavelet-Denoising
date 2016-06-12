@@ -3,6 +3,7 @@
 #include <QString>
 
 #include <src/AudioSignal.h>
+#include <src/Constants.h>
 
 class ThresholdsManager
 {
@@ -22,7 +23,6 @@ public:
 
     static QList<QString> thresholdsNames();
     static ThresholdType fromString(const QString& str);
-    static SignalSource threshodedSignal(ThresholdType type,const SignalSource &signal, double threshod, double step, double overValue = 0);
 
     ThresholdType thresholdType() const { return m_thresholdType; }
     void setThresholdType(const ThresholdType &thresholdType) { m_thresholdType = thresholdType; }
@@ -30,11 +30,14 @@ public:
     SignalsSourceVector signalsVector() const { return m_signalsVector; }
     void setSignalsVector(const SignalsSourceVector &signalsVector) { m_signalsVector = signalsVector; }
 
-    void makeThreshold(const QVector<double> &thresholds);
+    void makeThreshold(const QVector<double> &thresholdLevels);
 
     SignalsSourceVector thresholdedSignalsVector() const { return m_thresholdedSignalsVector; }
 
+    void automaticThreshold(const ThresholdType &type);
+
 private:
+    SignalSource threshodedSignal(ThresholdType type,const SignalSource &signal, double threshod, double step, double overValue = Constants::thresholdsDefaultOverValue);
     ThresholdType m_thresholdType;
 
     SignalsSourceVector m_signalsVector;

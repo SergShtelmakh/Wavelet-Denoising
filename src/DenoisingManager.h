@@ -3,10 +3,9 @@
 #include <QObject>
 
 #include <src/AudioSignal.h>
+#include <src/ThresholdsManager.h>
 #include <src/wavelets/DiscretePeriodicWavelet.h>
 #include <QScopedPointer>
-
-class ThresholdsManager;
 
 class DenoisingManager : public QObject
 {
@@ -18,7 +17,9 @@ public:
 
     void setSignal(const AudioSignal& signal);
     void prepareToDenoising(const QString& waveletName, int level);
+    void prepareToDenoising(Wavelet::WaveletFunction name, int level);
     void denoising(const QString& thresholdType, const QVector<double>& thresholds);
+    void automaticDenoising(ThresholdsManager::ThresholdType type);
 
     SignalSource noisedSignal() const { return m_noisedSignal; }
     SignalSource transformedSignal() const { return m_transformedSignal; }
