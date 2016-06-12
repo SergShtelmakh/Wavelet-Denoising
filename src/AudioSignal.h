@@ -13,6 +13,7 @@ class AudioSignal
 
 public:
     using SignalSource = QVector<double>;
+    using SignalsSourceVector = QVector<SignalSource>;
 
     AudioSignal(){}
 
