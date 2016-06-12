@@ -2,6 +2,8 @@
 
 #include <QMainWindow>
 
+class AudioSignal;
+
 namespace Ui { class MainWindow; }
 
 class MainWindow : public QMainWindow
@@ -26,6 +28,11 @@ private slots:
     void on_actionSave_triggered();
 
 private:
+    void updatePlot();
+
     Ui::MainWindow *ui;
     QString m_fileName;
+
+    QScopedPointer<AudioSignal> m_inputSignal;
+    QScopedPointer<AudioSignal> m_processedSignal;
 };
