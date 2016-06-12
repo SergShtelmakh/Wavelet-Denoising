@@ -3,9 +3,9 @@
 namespace Constants {
 
     // audio
-    double audioDefaultSampleFrequency = 48000.0;
+    const double audioDefaultSampleFrequency = 48000.0;
 
-    double noiseDefaultMaxAmplitude = 1000;
-    double noiseDefaultDensity      = 1.0;
+    const double noiseDefaultMaxAmplitude = 1000;
+    const double noiseDefaultDensity      = 1.0;
 
 }

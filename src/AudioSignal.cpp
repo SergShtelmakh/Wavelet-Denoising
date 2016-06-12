@@ -1,12 +1,14 @@
 #include "AudioSignal.h"
 
-namespace AudioSignal {
+#include <src/AudioUtil.h>
+
+namespace {
 
 const int cMsInSec = 1000;
 
-SignalSource toSignalSource(Aquila::WaveFile *wave)
+AudioSignal::SignalSource toSignalSource(Aquila::WaveFile *wave)
 {
-    SignalSource resultSignal;
+    AudioSignal::SignalSource resultSignal;
     for (auto sample : *wave) {
         resultSignal.push_back(sample);
     }
@@ -67,7 +69,7 @@ double AudioSignal::sampleFrequency() const
 
 void AudioSignal::makeWhiteNoise(double maxAmplitude, double density)
 {
-    m_signalSource = Audio::makeWhiteNoise(m_signalSource, maxAmplitude, density);
+    m_signalSource = AudioUtil::makeWhiteNoise(m_signalSource, maxAmplitude, density);
 }
 
 void AudioSignal::normalizeSignalSource()

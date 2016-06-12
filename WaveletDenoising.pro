@@ -14,10 +14,12 @@ TEMPLATE = app
 CONFIG   += C++11
 
 SOURCES  += $$PWD/src/AudioSignal.cpp \
+            $$PWD/src/AudioUtil.cpp \
             $$PWD/src/main.cpp \
             $$PWD/src/MainWindow.cpp
 
 HEADERS  += $$PWD/src/AudioSignal.h \
+            $$PWD/src/AudioUtil.h \
             $$PWD/src/Constants.h \
             $$PWD/src/MainWindow.h
 
