@@ -1,6 +1,7 @@
 #pragma once
 
 #include <src/AudioSignal.h>
+#include <src/AnalyzerWidget.h>
 
 class QCustomPlot;
 
@@ -30,4 +31,7 @@ struct PlotData {
 
     QCustomPlot* createPlot(const SignalSource &data, const QString &title = "");
     void createAudioPlot(const SignalSource &data);
+
+    // TODO refactoring
+    QCustomPlot *createPlot(const AnalyzerWidget::AnalyzerPlotData& data, double minX, double maxX);
 }

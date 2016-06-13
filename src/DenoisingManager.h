@@ -16,6 +16,7 @@ public:
     DenoisingManager();
 
     void setSignal(const AudioSignal& signal);
+    void setSignalSource(const SignalSource& signal);
     void prepareToDenoising(const QString& waveletName, int level);
     void prepareToDenoising(Wavelet::WaveletFunction name, int level);
     void denoising(const QString& thresholdType, const QVector<double>& thresholds);

@@ -5,7 +5,7 @@
 namespace AudioUtil {
 using SignalSource = AudioSignal::SignalSource;
 
-SignalSource makeWhiteNoise(const SignalSource &signal, double findMax, double density);
+SignalSource makeWhiteNoise(const SignalSource &signal, double maxAmplitude = Constants::noiseDefaultMaxAmplitude, double density = Constants::noiseDefaultDensity);
 SignalSource amplitudeAverage(const SignalSource &signal, int step, bool absolute = false);
 SignalSource signalDensity(const SignalSource &signal, bool positivePart = true, int max = Constants::audioUtilMaxDensityVal);
 SignalSource signalDifference(const SignalSource &first, const SignalSource &second);

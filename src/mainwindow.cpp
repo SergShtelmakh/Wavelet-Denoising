@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include <src/AnalyzerWidget.h>
 #include <src/AudioSignal.h>
 #include <src/AudioPlayerWidget.h>
 #include <src/AudioUtil.h>
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_inputSignal(new AudioSignal(csTestFileName))
     , m_processedSignal(new AudioSignal(m_inputSignal->source()))
     , m_denoisingWidget(new DenoisingWidget)
+    , m_analyzerWidget(new AnalyzerWidget)
 {
     ui->setupUi(this);
     updatePlot();
@@ -68,7 +70,8 @@ void MainWindow::on_pbAutomaticDenoising_clicked()
 
 void MainWindow::on_pbAutomaticDenoisingTest_clicked()
 {
-    // TODO
+    m_analyzerWidget->setSignal(m_processedSignal->source());
+    m_analyzerWidget->show();
 }
 
 void MainWindow::on_actionRecorder_triggered()

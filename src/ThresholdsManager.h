@@ -23,6 +23,7 @@ public:
 
     static QList<QString> thresholdsNames();
     static ThresholdType fromString(const QString& str);
+    static QString toString(const ThresholdType& type);
 
     ThresholdType thresholdType() const { return m_thresholdType; }
     void setThresholdType(const ThresholdType &thresholdType) { m_thresholdType = thresholdType; }

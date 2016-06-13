@@ -11,6 +11,11 @@ void DenoisingManager::setSignal(const AudioSignal &signal)
     m_noisedSignal = signal.source();
 }
 
+void DenoisingManager::setSignalSource(const DenoisingManager::SignalSource &signalSource)
+{
+    m_noisedSignal = signalSource;
+}
+
 void DenoisingManager::prepareToDenoising(const QString &waveletName, int level)
 {
     prepareToDenoising(Wavelet::fromString(waveletName), level);

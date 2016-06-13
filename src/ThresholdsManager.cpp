@@ -19,11 +19,6 @@ ThresholdTypeHash makeThresholdNameHash() {
 }
 
 static const auto thresholdsNameHash = makeThresholdNameHash();
-
-QString toString(ThresholdType type) {
-    return thresholdsNameHash.value(type, "");
-}
-
 }
 
 QList<QString> ThresholdsManager::thresholdsNames()
@@ -41,6 +36,11 @@ QList<QString> ThresholdsManager::thresholdsNames()
 ThresholdsManager::ThresholdType ThresholdsManager::fromString(const QString &str)
 {
     return thresholdsNameHash.key(str, ThresholdType::Hard);
+}
+
+QString ThresholdsManager::toString(const ThresholdsManager::ThresholdType &type)
+{
+    return thresholdsNameHash.value(type, "");
 }
 
 ThresholdsManager::SignalSource ThresholdsManager::threshodedSignal(ThresholdsManager::ThresholdType type,

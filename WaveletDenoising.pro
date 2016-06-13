@@ -13,7 +13,8 @@ TEMPLATE = app
 
 CONFIG   += C++11
 
-SOURCES  += $$PWD/src/AudioPlayerWidget.cpp \
+SOURCES  += $$PWD/src/AnalyzerWidget.cpp \
+            $$PWD/src/AudioPlayerWidget.cpp \
             $$PWD/src/AudioSignal.cpp \
             $$PWD/src/AudioUtil.cpp \
             $$PWD/src/DenoisingManager.cpp \
@@ -21,12 +22,14 @@ SOURCES  += $$PWD/src/AudioPlayerWidget.cpp \
             $$PWD/src/main.cpp \
             $$PWD/src/MainWindow.cpp \
             $$PWD/src/PlotManager.cpp \
+            $$PWD/src/SignalAnalyzer.cpp \
             $$PWD/src/ThresholdsManager.cpp \
             $$PWD/src/ThresholdsWidget.cpp \
             $$PWD/src/wavelets/DiscretePeriodicWavelet.cpp \
             $$PWD/src/wavelets/Wavelet.cpp
 
-HEADERS  += $$PWD/src/AudioPlayerWidget.h \
+HEADERS  += $$PWD/src/AnalyzerWidget.h \
+            $$PWD/src/AudioPlayerWidget.h \
             $$PWD/src/AudioSignal.h \
             $$PWD/src/AudioUtil.h \
             $$PWD/src/Constants.h \
@@ -34,12 +37,14 @@ HEADERS  += $$PWD/src/AudioPlayerWidget.h \
             $$PWD/src/DenoisingWidget.h \
             $$PWD/src/MainWindow.h \
             $$PWD/src/PlotManager.h \
+            $$PWD/src/SignalAnalyzer.h \
             $$PWD/src/ThresholdsManager.h \
             $$PWD/src/ThresholdsWidget.h \
             $$PWD/src/wavelets/DiscretePeriodicWavelet.h \
             $$PWD/src/wavelets/Wavelet.h
 
-FORMS    += $$PWD/src/AudioPlayerWidget.ui \
+FORMS    += $$PWD/src/AnalyzerWidget.ui \
+            $$PWD/src/AudioPlayerWidget.ui \
             $$PWD/src/DenoisingWidget.ui \
             $$PWD/src/MainWindow.ui \
             $$PWD/src/ThresholdsWidget.ui

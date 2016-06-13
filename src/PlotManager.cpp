@@ -4,6 +4,22 @@
 
 #include <qcustomplot/qcustomplot.h>
 
+namespace {
+    QPen getPenForThresholds(int i) {
+        switch (i) {
+        case 0:
+        return QPen(Qt::green, 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin);
+        case 1:
+        return QPen(Qt::red, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+        case 2:
+        return QPen(Qt::blue, 3, Qt::DashLine, Qt::RoundCap, Qt::RoundJoin);
+        case 3:
+        return QPen(Qt::black, 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin);
+        }
+        return QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    }
+}
+
 PlotManager::PlotData PlotManager::createPlotData(const SignalSource &data, double minX, double maxX)
 {
     PlotData result;
@@ -81,4 +97,43 @@ void PlotManager::createAudioPlot(const SignalSource &data)
     plot(pl, data, 0, data.size() / (Constants::audioDefaultSampleFrequency / 1000));
     pl->setGeometry(Constants::plotDefaultGeometry);
     pl->show();
+}
+
+QCustomPlot *PlotManager::createPlot(const AnalyzerWidget::AnalyzerPlotData &data, double minX, double maxX)
+{
+    QCustomPlot * pl = new QCustomPlot();
+
+    int i = 0;
+
+    double minY =  1000000.0;
+    double maxY = -1000000.0;
+
+    for (auto currentPlotData : data.data) {
+         auto plotData = createPlotData(currentPlotData.second, minX, maxX);
+
+         pl->addGraph();
+         pl->graph()->setPen(getPenForThresholds(i));
+         pl->graph()->setName(currentPlotData.first);
+         pl->graph()->setData(plotData.x, plotData.y);
+         minY = qMin(minY, plotData.minY);
+         maxY = qMax(maxY, plotData.maxY);
+         i++;
+    }
+
+    pl->xAxis->setLabel("x");
+    pl->yAxis->setLabel("y");
+
+    pl->xAxis->setRange(minX, maxX);
+    pl->yAxis->setRange(minY, maxY);
+
+    pl->legend->setVisible(true);
+    pl->legend->setFont(QFont("Helvetica", 9));
+
+    pl->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+    pl->replot();
+    pl->plotLayout()->insertRow(0);
+    pl->plotLayout()->addElement(0, 0, new QCPPlotTitle(pl, data.waveletName));
+    pl->setGeometry(Constants::plotDefaultGeometry);
+    pl->show();
+    return pl;
 }
